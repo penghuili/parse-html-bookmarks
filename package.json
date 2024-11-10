@@ -1,6 +1,6 @@
 {
   "name": "parse-html-bookmarks",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Parse HTML bookmarks file for web apps.",
   "author": "Penghui Li",
   "main": "index.js",
