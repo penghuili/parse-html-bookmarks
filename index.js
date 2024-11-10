@@ -1,12 +1,12 @@
 export function parseHTMLBookmarks(htmlContent) {
-  const h3s = findH3Positions(htmlContent);
+  const h3s = findH3s(htmlContent);
   const groups = [];
 
   for (let i = 0; i < h3s.length; i++) {
     const h3 = h3s[i];
     const nextH3 = h3s[i + 1];
     const subString = htmlContent.slice(h3.index, nextH3?.index);
-    const links = parseLinks(subString);
+    const links = findLinks(subString);
     if (links.length) {
       groups.push({
         title: h3.title,
@@ -18,7 +18,7 @@ export function parseHTMLBookmarks(htmlContent) {
   return groups;
 }
 
-function parseLinks(htmlContent) {
+function findLinks(htmlContent) {
   const aPattern = /<A HREF="(.*?)".*?>(.*?)<\/A>/gi;
   let match;
   const links = [];
@@ -33,7 +33,7 @@ function parseLinks(htmlContent) {
   return links;
 }
 
-function findH3Positions(htmlContent) {
+function findH3s(htmlContent) {
   const h3Pattern = /<H3.*?>(.*?)<\/H3>/gi;
   let match;
   const h3Positions = [];
